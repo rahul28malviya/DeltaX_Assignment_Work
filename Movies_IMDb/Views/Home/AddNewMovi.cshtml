@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "AddNewMovi";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+</head>
+<body ng-app="HomeApp" ng-controller="HomeController">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Movie Name</label>
+                    <input type="text" ng-model="Movie.MovieName" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Movie Plot</label>
+                    <input type="text" ng-model="Movie.Plot" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Release Date</label>
+                    <input type="date" ng-model="Movie.DateOfRelease" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Producer</label><br />
+                    <select ng-model="Movie.ProducerId">
+                        <option value="">--Select Producer--</option>
+                        <option data-ng-repeat="pdcr in ProducerList" value="{{pdcr.ProducerId}}">{{pdcr.ProducerName}}</option>
+                    </select>
+                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#newProducer">Add New Producer</button>
+                </div>
+                <div class="form-group">
+                    <label>Actor</label>
+                    <div style="border:1px #dadada solid">
+                        <label ng-repeat="act in ActorList">
+                            <input type="checkbox" checklist-model="Actor" ng-model="act.checked" ng-true-value="{{true}}"
+                                   ng-false-value="{{false}}" checklist-value="{{act.ActorId}}"> {{act.ActorName}}
+                        </label>
+                    </div>
+                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#newActor">Add New Actor</button>
+                </div>
+                <div class="form-group">
+                    <label>Poster</label>
+                    <input id="PosterImage" type="file" onchange="angular.element(this).scope().setFile(this)" />
+                </div>
+                <div class="form-group">
+                    <input type="button" class="btn btn-primary" ng-click="savedata()" value="{{btntext}}" />
+                </div>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
+    <!-- Actor Modal -->
+    <div class="modal fade" id="newActor" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add New Actor</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Actor Name</label>
+                        <input type="text" ng-model="Actor.ActorName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <input type="text" ng-model="Actor.Gender" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>DOB</label>
+                        <input type="date" ng-model="Actor.DateOfBirth" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>BIO</label>
+                        <input type="text" ng-model="Actor.Bio" class="form-control" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="saveactor()" class="btn btn-success pull-left" data-dismiss="modal">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Producer Model-->
+    <div class="modal fade" id="newProducer" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add New Producer</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Producer Name</label>
+                        <input type="text" ng-model="Producer.ProducerName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <input type="text" ng-model="Producer.Gender" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>DOB</label>
+                        <input type="date" ng-model="Producer.DateOfBirth" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>BIO</label>
+                        <input type="text" ng-model="Producer.Bio" class="form-control" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="saveproducer()" class="btn btn-success pull-left" data-dismiss="modal">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/AngularController/HomeAngular.js"></script>
+</body>
+</html>
