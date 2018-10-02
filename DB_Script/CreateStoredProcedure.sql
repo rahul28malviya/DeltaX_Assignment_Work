@@ -1,12 +1,18 @@
 ﻿CREATE PROCEDURE [dbo].[InsertNewMovie]
-	@Movie_Name varchar(50),
+	@Movie_Name varchar(250),
 	@Movie_Release_Date DateTime,
 	@Movie_Plot varchar(250),
-	@Movie_Poster_Path nvarchar(MAX)
+	@Movie_Poster nvarchar(MAX)
+	@Movie_Id    INT OUTPUT
 AS
 	BEGIN
+	SET NOCOUNT ON;
+	
 	INSERT INTO [dbo].[MOVIES] (MOVIENAME,DATEOFRELEASE,PLOT,POSTER) 
-	VALUES(@Movie_Name,@Movie_Release_Date,@Movie_Plot,@Movie_Poster_Path)
+	VALUES(@Movie_Name,@Movie_Release_Date,@Movie_Plot,@Movie_Poster)
+	
+	SET @Movie_Id=SCOPE_IDENTITY()
+    RETURN  @Movie_Id
 END
 
 CREATE PROCEDURE [dbo].[SelectProducers]
@@ -22,7 +28,7 @@ AS
 END
 
 CREATE PROCEDURE [dbo].[InsertNewProducer]
-	@ProducerName varchar(50),
+	@ProducerName varchar(250),
 	@Gender char(1),
 	@DateOfBirth DateTime,
 	@Bio varchar(250)
@@ -46,7 +52,7 @@ CREATE PROCEDURE [dbo].[InsertMapMovieActor]
 	@Movie_Id INT
 AS
 	BEGIN
-	INSERT INTO [dbo].[MAPACTORSMOVIES] (ACTORID,MOVIEID,ROLES) 
+	INSERT INTO [dbo].[MAPACTORSMOVIES] (ACTORID,MOVIEID) 
 	VALUES(@Actor_Id,@Movie_Id)
 END
 
